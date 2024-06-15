@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Signup.css";
 import userService from "../../Services/UserService";
+import Login from "../Login/Login";
 
 const Signup = () => {
   const [keys, setKeys] = useState([]);
-  const [formData, setFormData] = useState([]);
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     async function fetchKeys() {
@@ -37,6 +38,8 @@ const Signup = () => {
         return "password";
       case "contact":
         return "number";
+      case "role":
+        return "number";
       default:
         return "text";
     }
@@ -52,10 +55,11 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     try {
       const response = await userService.saveUser(formData);
-      console.log(response);
+      if (response) {
+        <Login />;
+      }
     } catch (error) {
       console.error("Error, ", error);
     }
@@ -69,6 +73,7 @@ const Signup = () => {
           <div key={key} className="form-floating mb-3">
             <input
               type={getInputType(key)}
+              name={key.toLowerCase()}
               className="form-control"
               placeholder={key}
               onChange={handleChange}
