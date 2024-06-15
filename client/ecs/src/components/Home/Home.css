@@ -1,0 +1,13 @@
+.card img {
+    width: 13rem;
+    object-fit: cover;
+    height: 18rem;
+}
+
+.card img:hover {
+    object-fit: contain;
+}
+
+.card {
+    cursor: pointer;
+}
