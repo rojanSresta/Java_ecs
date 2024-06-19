@@ -57,7 +57,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await userService.saveUser(formData);
-      if (response) {
+      if (response.message == `User added Successfully`) {
         <Login />;
       }
     } catch (error) {
