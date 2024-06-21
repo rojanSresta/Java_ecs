@@ -5,12 +5,10 @@ import com.texas.ecommerce.exception.UserNotFoundException;
 import com.texas.ecommerce.model.User;
 import com.texas.ecommerce.repo.UserRepo;
 import com.texas.ecommerce.service.UserService;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -85,5 +83,15 @@ public class UserServiceImpl implements UserService {
         return savedUser.getId();
     }
 
-
+    @Override
+    public User login(String email, String pass) {
+        User data = userRepo.findByEmail(email).orElseThrow(
+                ()->new RuntimeException("Email not found")
+        );
+        if(data.getPassword() == pass){
+            return data;
+        }else {
+            throw new RuntimeException("Incorrect Password!");
+        }
+    }
 }

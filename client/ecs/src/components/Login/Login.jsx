@@ -18,8 +18,9 @@ const Login = () => {
     }));
   };
 
+  //accessing the website if email and password matches
   const handleSubmit = async () => {
-    const response = await userService.findUser(loginData);
+    const response = await userService.LoginByEmailAndPass(loginData);
     console.log(response);
   };
 

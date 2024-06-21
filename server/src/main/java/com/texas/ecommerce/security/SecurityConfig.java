@@ -32,6 +32,7 @@ public class SecurityConfig {
             authorize.requestMatchers("/product/list").permitAll();
             authorize.requestMatchers("/api/user/save").permitAll();
             authorize.requestMatchers("/api/user/id/1").permitAll();
+            authorize.requestMatchers("/api/user/login").permitAll();
             authorize.anyRequest().authenticated();
         })
                 .httpBasic(Customizer.withDefaults()); //setting auth to basic auth

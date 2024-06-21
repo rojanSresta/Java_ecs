@@ -2,7 +2,9 @@ package com.texas.ecommerce.controller;
 
 import com.texas.ecommerce.dto.OrderDto;
 import com.texas.ecommerce.dto.UserDto;
+import com.texas.ecommerce.model.User;
 import com.texas.ecommerce.service.OrderService;
+import com.texas.ecommerce.repo.UserRepo;
 import com.texas.ecommerce.service.ProductService;
 import com.texas.ecommerce.service.UserService;
 import jakarta.validation.Valid;
@@ -29,6 +31,16 @@ public class UserController {
         Integer data = userService.save(userDto);
         return ResponseEntity.ok(
                 Map.of("message", "User added Successfully", "data", data)
+        );
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity loginByEmailAndPass(@Valid @RequestBody UserDto userDto){
+        String email = userDto.getEmail();
+        String pass = userDto.getPassword();
+        User userData =  userService.login(email, pass);
+        return  ResponseEntity.ok(
+                Map.of("message", "Login Success", "data", userData)
         );
     }
 

@@ -49,6 +49,23 @@ const userService = {
       throw error;
     }
   },
+
+  LoginByEmailAndPass: async (loginData) => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/user/email`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application.json",
+        },
+        body: JSON.stringify(loginData),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error ", error);
+      throw error;
+    }
+  },
 };
 
 export default userService;
